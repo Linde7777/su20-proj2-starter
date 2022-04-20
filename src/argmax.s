@@ -38,7 +38,7 @@ loop_start:
     
     lw s4,0(s0) #s4->arr[i]
     blt s4,s3,loop_continue
-    add s3,s4,x0    #max=arr[i]
+    lw s3,0(s4) #max=arr[i]
 
 loop_continue:
     addi s2,s2,1
@@ -47,7 +47,9 @@ loop_continue:
 
 loop_end:
     add s2,x0,x0    #s2->i
-    add s0,t0,x0    #recover the address of arr
+    
+    #recover the address of arr, for later use
+    add s0,t0,x0    
     jal x0,loop2_start
 
 
