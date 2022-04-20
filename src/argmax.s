@@ -31,7 +31,7 @@ argmax:
     add t0,s0,x0    #store the s0 before it is used
 
     lw t1,0(s0)     #t0->arr[0]
-    add s3,t0,x0    #s3->max, max=arr[0]
+    add s3,t1,x0    #s3->max, max=arr[0]
 
 loop_start:
     bge s2,s1,loop_end
