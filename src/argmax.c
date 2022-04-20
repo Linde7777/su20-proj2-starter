@@ -23,6 +23,6 @@ int argmax(int arr[],int len){
 /*
 s0->arr s1->len
 s2->i   s3->max 
-s4->arr[i]
+s4->arr[i]  s5->index
 3 -42 432 7 -5 6 5 -114 2 
 */
