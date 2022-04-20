@@ -34,11 +34,10 @@ relu:
 loop_start:
     beq s1,s2,loop_end
     
-    mul s4,s2,4     #s4->offset
-    lw s3,(s4)s0    #s3->address of arr[i]
+    addi s0,s0,4
+    lw t0,0(s0)
 
-    bge s3,0,loop_continue
-    add s3,s3,x0
+    bge t0,x0,loop_continue
     
     addi s2,s2,1
     jal x0,loop_start
@@ -49,6 +48,5 @@ loop_continue:
 
 loop_end:
     # Epilogue
-
     
 	ret
