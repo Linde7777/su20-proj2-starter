@@ -56,7 +56,8 @@ loop2_start:
     lw s4,0(s0) #arr[i]
     bne s3,s4,loop2_continue    #s3->max
     
-    add a0,s2,x0    #now we find the index, index==i
+    lw a0,0(s2) #now we find the index, index==i
+    jal x0,loop2_end
 
 loop2_continue:
     addi s2,s2,1
