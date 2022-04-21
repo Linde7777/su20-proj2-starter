@@ -48,6 +48,6 @@ s4->stride of arr1
 
 s5->result
 s6->i
-s7->arr0[i] aka *(s0+s6*s3)
-s8->arr1[i] aka *(s1+s6*s4)
+s7->arr0[i] aka *(s0+4*s6*s3)
+s8->arr1[i] aka *(s1+4*s6*s4)
 */
