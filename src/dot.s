@@ -17,28 +17,64 @@
 # If the stride of either vector is less than 1,
 # this function exits with error code 6.
 # =======================================================
+
+# To make to code more readable,
+# please goto view dot.c
 dot:
 
     # Prologue
+    //TODO modify capacity of stack
+    addi sp,sp,-36
+    sw s0,0(sp)
+    sw s1,4(sp)
+    sw s2,8(sp)
+    sw s3,12(sp)
+    sw s4,16(sp)
+    sw s5,20(sp)
+    sw s6,24(sp)
+    sw s7,28(sp)
+    sw s8,32(sp)
 
+    add s0,a0,x0
+    add s1,a1,x0
+    add s2,a2,x0
+    add s3,a3,x0
+    add s4,a4,x0
+
+    //TODO error code
+
+    add s5,x0,x0
+    add s6,x0,x0
 
 loop_start:
+    bge s6,s2,loop_end
+    lw s7,0(s0)
+    lw s8,0(s1)
+    mul t0,s7,s8
+    add s5,s5,t0
 
+    addi s6,s6,1
+    mul t0,s6,s3
+    add s0,s0,t0
+    mul t1,s6,s4
+    add s1,s1,t1
 
-
-
-
-
-
-
-
-
-
+    jal x0,loop_start
 
 loop_end:
 
-
     # Epilogue
+    add a0,s5,x0
 
+    lw s0,0(sp)
+    lw s1,4(sp)
+    lw s2,8(sp)
+    lw s3,12(sp)
+    lw s4,16(sp)
+    lw s5,20(sp)
+    lw s6,24(sp)
+    lw s7,28(sp)
+    lw s8,32(sp)
+    addi sp,sp,36
     
     ret
