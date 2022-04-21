@@ -20,6 +20,7 @@
 
 # To make to code more readable,
 # please go to view the register table in dot.c
+
 dot:
 
     # Prologue
