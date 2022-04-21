@@ -30,8 +30,7 @@ argmax:
     add s1,a1,x0    #s1->length of arr
     add s2,x0,x0    #s2->i
 
-    lw t0,0(s0)     #t0->arr[0]
-    add s3,t0,x0    #s3->max, max=arr[0]
+    lw s3,0(s0)     #s3->max, max=arr[0]
     add s5,x0,x0    #s5->index
 
 loop_start:
@@ -39,7 +38,7 @@ loop_start:
     
     lw s4,0(s0) #s4->arr[i]
     blt s4,s3,loop_continue
-    lw s3,0(s4) #max=arr[i]
+    lw s3,0(s0) #max=arr[i]
     add s5,s2,x0
 
 loop_continue:
@@ -49,14 +48,13 @@ loop_continue:
 
 loop_end:
     # Epilogue
+    add a0,s5,x0
     lw s0,0(sp)
     lw s1,4(sp)
     lw s2,8(sp)
     lw s3,12(sp)
     lw s4,16(sp)
     lw s5,20(sp)
-   
     addi sp,sp,24
 
-    add a0,s5,x0
     ret
