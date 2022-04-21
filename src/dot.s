@@ -24,7 +24,6 @@
 dot:
 
     # Prologue
-    //TODO modify capacity of stack
     addi sp,sp,-36
     sw s0,0(sp)
     sw s1,4(sp)
@@ -41,11 +40,10 @@ dot:
     add s2,a2,x0
     add s3,a3,x0
     add s4,a4,x0
-
-    //TODO error code
-
+    
     add s5,x0,x0
     add s6,x0,x0
+    
 
 loop_start:
     bge s6,s2,loop_end
@@ -55,9 +53,13 @@ loop_start:
     add s5,s5,t0
 
     addi s6,s6,1
-    mul t0,s6,s3
-    add s0,s0,t0
-    mul t1,s6,s4
+    
+    li t0,4
+    mul t1,t0,s3
+    add s0,s0,t1
+
+    li t0,4
+    mul t1,t0,s4
     add s1,s1,t1
 
     jal x0,loop_start
