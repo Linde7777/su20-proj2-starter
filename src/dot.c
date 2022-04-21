@@ -30,3 +30,14 @@ int dot(int *arr0, int *arr1, int len, int s0, int s1) {
     }
     return result;
 }
+/*
+s0->arr0    s1->arr1
+s2->len     
+s3->stride of arr0
+s4->stride of arr1
+
+s5->result
+s6->i
+s7->arr0[i] aka *(s0+s6*s3)
+s8->arr1[i] aka *(s1+s6*s4)
+*/
