@@ -44,6 +44,10 @@ dot:
     add s5,x0,x0
     add s6,x0,x0
     
+    li t0,1
+    blt s2,t0,error_1
+    blt s3,t0,error_2
+    blt s4,t0,error_2
 
 loop_start:
     bge s6,s2,loop_end
@@ -65,10 +69,10 @@ loop_start:
     jal x0,loop_start
 
 loop_end:
-
-    # Epilogue
     add a0,s5,x0
-
+    
+recover_stack:
+    # Epilogue
     lw s0,0(sp)
     lw s1,4(sp)
     lw s2,8(sp)
@@ -81,3 +85,11 @@ loop_end:
     addi sp,sp,36
     
     ret
+
+error_1:
+    addi a0,x0,5
+    jal x0,recover_stack
+
+error_2:
+    addi a0,x0,6
+    jal x0,recover_stack
