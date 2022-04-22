@@ -25,6 +25,12 @@
 matmul:
 
     # Error checks
+    li t0,1
+    blt a1,t0,m0_dimen_error
+    blt a2,t0,m0_dimen_error
+    blt a4,t0,m1_dimen_error
+    blt a5,t0,m1_dimen_error
+    bne a2,a4,dimen_match_error
 
 
     # Prologue
@@ -60,3 +66,15 @@ outer_loop_end:
     
     
     ret
+
+m0_dimen_error:
+    addi a0,x0,2
+    jal x0,outer_loop_end
+
+m1_dimen_error:
+    addi a0,x0,3
+    jal x0,outer_loop_end
+
+dimen_match_error:
+    addi a0,x0,4
+    jal x0,outer_loop_end
