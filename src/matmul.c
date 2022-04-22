@@ -3,14 +3,15 @@
 
 int dot(int *arr0, int *arr1, int len, int s0, int s1);
 void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c);
-int main() {
-  int h0 = 2, w0 = 3, h1 = 3, w1 = 2;
-  int *arr0 = (int *)malloc(sizeof(int) * 6);
-  int *arr1 = (int *)malloc(sizeof(int) * 6);
 
-  for (int i = 0; i < 6; i++) {
+int main() {
+  int h0 = 3, w0 = 3, h1 = 3, w1 = 3;
+  int *arr0 = (int *)malloc(sizeof(int) * h0 * w0);
+  int *arr1 = (int *)malloc(sizeof(int) * h1 * w1);
+
+  for (int i = 0; i < h0 * w0; i++) {
     *(arr0 + i) = i + 1;
-    *(arr1 + i) = i + 7;
+    *(arr1 + i) = i + 1;
   }
 
   int height_of_c = h0;                                           // 2
@@ -18,8 +19,8 @@ int main() {
   int *c = (int *)malloc(sizeof(int) * width_of_c * height_of_c); // c.length=4
   matmul(arr0, h0, w0, arr1, h1, w1, c);
 
-  printf("\nresult: \n");
-  for (int i = 0; i < 4; i++) {
+  printf("\nresult:");
+  for (int i = 0; i < h0*h0; i++) {
     if (i % width_of_c == 0) {
       printf("\n");
     }
@@ -33,15 +34,9 @@ int main() {
 
 void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c) {
   // I have ignore the invalid input check
-
-  /*
-  arr0:   arr1:
-  1 2 3   7  8
-  4 5 6   9  10
-          11 12
-  */
-  int height_of_c = h0; // 2
-  int width_of_c = h0;  // 2
+ 
+  int height_of_c = h0; 
+  int width_of_c = h0;  
   int *ptrc = c;
 
   /*
