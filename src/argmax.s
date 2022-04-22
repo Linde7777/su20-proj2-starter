@@ -50,8 +50,11 @@ loop_continue:
     jal x0,loop_start
 
 loop_end:
-    # Epilogue
     add a0,s5,x0
+
+recover_stack:
+    
+    # Epilogue
     lw s0,0(sp)
     lw s1,4(sp)
     lw s2,8(sp)
@@ -64,12 +67,6 @@ loop_end:
 
 error:
     addi a0,x0,7
-    lw s0,0(sp)
-    lw s1,4(sp)
-    lw s2,8(sp)
-    lw s3,12(sp)
-    lw s4,16(sp)
-    lw s5,20(sp)
-    addi sp,sp,24
+    jal x0,recover_stack
 
     ret
