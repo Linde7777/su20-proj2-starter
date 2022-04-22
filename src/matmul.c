@@ -69,3 +69,14 @@ int dot(int *arr0, int *arr1, int len, int s0, int s1) {
   }
   return result;
 }
+
+
+/*
+s0->arr0  s1->h0
+s2->w0
+
+s3->arr1  s4->h1
+s5->w1
+
+s6->c
+*/
