@@ -2,24 +2,28 @@
 #include <stdlib.h>
 
 int dot(int *arr0, int *arr1, int len, int s0, int s1);
-void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1,int* c);
+void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c);
 int main() {
-  int h0=2,w0=3,h1=3,w1=2;
+  int h0 = 2, w0 = 3, h1 = 3, w1 = 2;
   int *arr0 = (int *)malloc(sizeof(int) * 6);
   int *arr1 = (int *)malloc(sizeof(int) * 6);
 
-  for(int i=0;i<6;i++){
-    *(arr0+i)=i+1;
-    *(arr1+i)=i+7;
+  for (int i = 0; i < 6; i++) {
+    *(arr0 + i) = i + 1;
+    *(arr1 + i) = i + 7;
   }
 
-  int height_of_c = h0;//2
-  int *c = (int *)malloc(sizeof(int) * 2 * height_of_c);//c.len=4
-  matmul(arr0, h0, w0, arr1, h1, w1,c);
-  
+  int height_of_c = h0;// 2
+  int width_of_c = h0;// 2
+  int *c = (int *)malloc(sizeof(int) * width_of_c * height_of_c); // c.length=4
+  matmul(arr0, h0, w0, arr1, h1, w1, c);
+
   printf("\nresult: \n");
-  for(int i=0;i<4;i++){
-    printf(" %d",*(c+i));
+  for (int i = 0; i < 4; i++) {
+    if (i % width_of_c == 0) {
+      printf("\n");
+    }
+    printf(" %d", *(c + i));
   }
 
   free(arr0);
@@ -27,8 +31,8 @@ int main() {
   free(c);
 }
 
-void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1,int* c) {
-  //I have ignore the invalid input check
+void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c) {
+  // I have ignore the invalid input check
 
   /*
   arr0:   arr1:
@@ -36,18 +40,18 @@ void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1,int* c) {
   4 5 6   9  10
           11 12
   */
-  int height_of_c = h0;//2
+  int height_of_c = h0; // 2
   int *ptrc = c;
-  
-  //c00 = dot(arr0, arr1    , w0, 1, w1)
-  //c01 = dot(arr0, arr1 + 1, w0, 1, w1)
+
+  // c00 = dot(arr0, arr1    , w0, 1, w1)
+  // c01 = dot(arr0, arr1 + 1, w0, 1, w1)
   for (int i = 0; i < height_of_c; i++) {
     *ptrc = dot(arr0, arr1 + i, w0, 1, w1);
     ptrc += 1;
   }
 
-  //c10 = dot(arr0 + w0, arr1    , w0, 1, w1)
-  //c11 = dot(arr0 + w0, arr1 + 1, w0, 1, w1)
+  // c10 = dot(arr0 + w0, arr1    , w0, 1, w1)
+  // c11 = dot(arr0 + w0, arr1 + 1, w0, 1, w1)
   for (int i = 0; i < height_of_c; i++) {
     *ptrc = dot(arr0 + w0, arr1 + i, w0, 1, w1);
     ptrc += 1;
