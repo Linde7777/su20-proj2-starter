@@ -63,7 +63,7 @@ void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c) {
   }
   */
 
-  for (int i = 0; i < width_of_c; i++) {
+  for (int i = 0; i < height_of_c; i++) {
     for (int j = 0; j < width_of_c; j++) {
     *ptrc = dot(arr0 + w0*i, arr1 + j, w0, 1, w1);
     ptrc += 1;
