@@ -77,9 +77,16 @@ s3->arr1  s4->h1  s5->w1
 s6->c     s7->height_of_c
 s8->width_of_c
 s9->ptrc  s10->i
-s11->j
+s11->j    
 */
 
+/*
+a0 (int*) is the pointer to the start of v0
+a1 (int*) is the pointer to the start of v1
+a2 (int)  is the length of the vectors
+a3 (int)  is the stride of v0
+a4 (int)  is the stride of v1
+*/
 int dot(int *arr0, int *arr1, int len, int s0, int s1) {
   int result = 0;
   for (int i = 0; i < len; i++) {
