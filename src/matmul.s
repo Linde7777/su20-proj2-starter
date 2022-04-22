@@ -49,8 +49,13 @@ matmul:
     sw s10,44(sp)
     sw s11,48(sp)
     
-    # TODO 
-    # mv s0, a0
+    mv s0,a0
+    mv s1,a1
+    mv s2,a2
+    mv s3,a3
+    mv s4,a4
+    mv s5,a5
+    mv s6,a6
     
     add s7,s1,x0
     add s8,s1,x0
@@ -61,8 +66,8 @@ matmul:
 outer_loop_start:
     bge s10,s7,outer_loop_end
 
-    la ra,outer_loop_start  #???
-    jal ra,inner_loop_start
+    # la ra,outer_loop_start  #???
+    jal inner_loop_start
     addi s10,s10,1
     
     jal x0,outer_loop_start
