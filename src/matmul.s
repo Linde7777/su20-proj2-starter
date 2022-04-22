@@ -61,12 +61,11 @@ matmul:
 outer_loop_start:
     bge s10,s7,outer_loop_end
 
-    # la ra,outer_loop_start
+    la ra,outer_loop_start  #???
     jal ra,inner_loop_start
     addi s10,s10,1
     
     jal x0,outer_loop_start
-
 
 
 inner_loop_start:
@@ -80,7 +79,7 @@ inner_loop_start:
     jal ra,dot
 
     sw a0,0(s9)
-    addi s9,s9,1
+    addi s9,s9,4    # sizeof(int)==4
     addi s11,s11,1
 
     jal x0,inner_loop_start
