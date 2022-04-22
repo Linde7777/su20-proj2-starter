@@ -75,7 +75,8 @@ void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c) {
 s0->arr0  s1->h0  s2->w0
 s3->arr1  s4->h1  s5->w1
 s6->c     s7->height_of_c
-s8->ptrc  s9->i
+s8->width_of_c
+s9->ptrc  s10->i
 */
 
 int dot(int *arr0, int *arr1, int len, int s0, int s1) {
