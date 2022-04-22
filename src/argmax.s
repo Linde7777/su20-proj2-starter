@@ -29,13 +29,12 @@ argmax:
     add s0,a0,x0    #s0->arr
     add s1,a1,x0    #s1->length of arr
     
-    addi t0,x0,1
-    blt s1,t0,error
-
     add s2,x0,x0    #s2->i
     lw s3,0(s0)     #s3->max, max=arr[0]
     add s5,x0,x0    #s5->index
 
+    addi t0,x0,1
+    blt s1,t0,error
 
 loop_start:
     bge s2,s1,loop_end
