@@ -36,6 +36,9 @@ relu:
     addi s1,a1,0    #number of element
     addi s2,x0,0    #i
 
+    li t0,1
+    blt s1,t0,error
+
 loop_start:
     beq s1,s2,loop_end
     
@@ -60,3 +63,7 @@ loop_end:
     addi sp,sp,16
  
 	ret
+
+error:
+    addi a0,x0,8
+    jal x0,loop_end
