@@ -1,3 +1,4 @@
+.import ./dot.s
 .globl matmul
 
 .text
@@ -56,7 +57,6 @@ matmul:
     mv s4,a4
     mv s5,a5
     mv s6,a6
-    
     add s7,s1,x0
     add s8,s1,x0
     add s9,s6,x0
@@ -76,12 +76,17 @@ outer_loop_start:
 inner_loop_start:
     bge s11,s8,inner_loop_end
     
-    mv a0,s0
-    mv a1,s3
+    mul t0,s2,s10
+    add t1,s0,t0
+    mv a0,t1
+
+    add t0,s1,s11
+    mv a1,t0
+
     mv a2,s2
     li a3,1
     mv a4,s5
-    jal ra,dot
+    jal dot
 
     sw a0,0(s9)
     addi s9,s9,4    # sizeof(int)==4
