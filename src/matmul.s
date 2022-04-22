@@ -80,7 +80,7 @@ inner_loop_start:
     add t1,s0,t0
     mv a0,t1
 
-    add t0,s1,s11
+    add t0,s3,s11
     mv a1,t0
 
     mv a2,s2
