@@ -1,6 +1,6 @@
 .import ../../src/matmul.s
 .import ../../src/utils.s
-.import ../../src/dot.s
+# .import ../../src/dot.s
 
 # static values for testing
 .data
@@ -55,6 +55,10 @@ main:
     # Set dimensions of d
     li s1,3 # MAKE CHANGES HERE
     li s2 3 # MAKE CHANGES HERE
+    
+    mv a0,s0
+    mv a1,s1
+    mv a2,s2
     jal print_int_array
 
 
