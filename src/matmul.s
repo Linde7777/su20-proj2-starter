@@ -65,7 +65,8 @@ matmul:
 
 outer_loop_start:
     bge s10,s7,outer_loop_end
-
+    
+    add s11,x0,x0
     jal inner_loop_start
     addi s10,s10,1
     
