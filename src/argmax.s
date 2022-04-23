@@ -34,7 +34,7 @@ argmax:
     add s5,x0,x0    #s5->index
 
     addi t0,x0,1
-    blt s1,t0,error
+    blt s1,t0,length_error
 
 loop_start:
     bge s2,s1,loop_end
@@ -65,7 +65,7 @@ recover_stack:
 
     ret
 
-error:
+length_error:
     addi a0,x0,7
     jal x0,recover_stack
 
