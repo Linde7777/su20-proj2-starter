@@ -38,9 +38,9 @@ read_matrix:
     sw s9,32(sp)
     sw ra,36(sp)
 
-    mv s0,a0    #s0->filename
-    mv s1,a1    #s1->nrows
-    mv s2,a2    #s2->ncols
+    mv s0,a0    
+    mv s1,a1    
+    mv s2,a2    
 
     # fopen
     mv a1,s0
@@ -83,7 +83,7 @@ read_matrix:
     li s8,0
 
 loop_start:
-    bge s8,t1,loop_end  #line 62,t0->size of matrix
+    bge s8,t1,loop_end  #line 62,t1->size of matrix
 
     mv a1,s3
     mv a2,s7
@@ -129,6 +129,6 @@ fread_error:
     li a0,51
     jal x0,recover_stack
 
-fclose_error
+fclose_error:
     li a0,52
     jal x0,recover_stack
