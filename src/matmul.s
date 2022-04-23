@@ -82,9 +82,10 @@ inner_loop_start:
     add t1,s0,t0
     mv a0,t1
 
-    add t0,s3,s11
+    mv t0,s11
     li t1,4
     mul t0,t0,t1
+    add t0,s3,t0
     mv a1,t0
 
     mv a2,s2
