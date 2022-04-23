@@ -1,22 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 /*
-# FUNCTION: Allocates memory and reads in a binary file as a matrix of integers
-#   If any file operation fails or doesn't read the proper number of bytes,
-#   exit the program with exit code 1.
-# FILE FORMAT:
-#   The first 8 bytes are two 4 byte ints representing the # of rows and columns
-#   in the matrix. Every 4 bytes afterwards is an element of the matrix in
-#   row-major order.
-# Arguments:
-#   a0 (char*) is the pointer to string representing the filename
-#   a1 (int*)  is a pointer to an integer, we will set it to the number of rows
-#   a2 (int*)  is a pointer to an integer, we will set it to the number of columns
-# Returns:
-#   a0 (int*)  is the pointer to the matrix in memory
-#
+read_matrix
+a0->filename    a1->nrows   a2->ncols
+return a0, a0->pointer to matrix
+
+fopen
+a1->filename    a2->mode, 0 read, 1 write
+return a0->file id
+
+fread
+a1->file id     a2->buffer
+a3->the number of bytes read from file
+
+fclose
+a1->file id
+a0->mode, 0 success, -1 fail
+
+s0->filename, s1->nrows, s2->ncols
+s3->file id, s4->number of rows
+s5->number of cols, s6->matrix
+s7->ptrm, s8->i
 */
+
+for(int i=0;i<9;i++){
+    fread(file id,ptrm,4)
+    ptrm+=1// ptrm+=4
+}
+
 int* read_martix(char* filename, int* nrows, int* ncols);
 
 int main(){
