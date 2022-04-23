@@ -66,7 +66,6 @@ matmul:
 outer_loop_start:
     bge s10,s7,outer_loop_end
 
-    # la ra,outer_loop_start  #???
     jal inner_loop_start
     addi s10,s10,1
     
@@ -75,6 +74,9 @@ outer_loop_start:
 
 inner_loop_start:
     bge s11,s8,inner_loop_end
+
+    addi sp,sp,-4
+    sw ra,0(sp)     # we will call dot() later
     
     mul t0,s2,s10
     li t2,4
@@ -97,12 +99,14 @@ inner_loop_start:
     addi s9,s9,4    # sizeof(int)==4
     addi s11,s11,1
 
+    lw ra,0(sp)
+    addi sp,sp,4
+
     jal x0,inner_loop_start
 
 
 inner_loop_end:
     ret
-
 
 outer_loop_end:
     
