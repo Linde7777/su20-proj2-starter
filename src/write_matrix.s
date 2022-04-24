@@ -5,7 +5,7 @@
 # FUNCTION: Writes a matrix of integers into a binary file
 #   If any file operation fails or doesn't write the proper number of bytes,
 #   exit the program with exit code 1.
-    TODO: exit2 a1->exit code
+#   TODO: exit2 a1->exit code
 # FILE FORMAT:
 #   The first 8 bytes of the file will be two 4 byte ints representing the
 #   numbers of rows and columns respectively. Every 4 bytes thereafter is an
@@ -28,7 +28,7 @@
 write_matrix:
 
     # Prologue
-    addi sp,sp,-36
+    addi sp,sp,-40
     sw s0,0(sp)
     sw s1,4(sp)
     sw s2,8(sp)
@@ -38,26 +38,27 @@ write_matrix:
     sw s6,24(sp)
     sw s7,28(sp)
     sw s8,32(sp)
+    sw ra,36(sp)
 
     mv s0,a0
     mv s1,a1
     mv s2,a2
     mv s3,a3
-    la s7,s2
-    la s8,s3
+    mv s7,s2
+    mv s8,s3
 
     # fopen 
     mv a1,s0
     li a2,1
-    mv s4,a0
     jal fopen
+    mv s4,a0
     li t0,-1
     beq a0,t0,fopen_error
 
     # fwrite the nrows
     mv a1,s4
     mv a2,s7
-    mv a3,1
+    li a3,1
     li a4,4
     jal fwrite
     bne a0,a3,fwrite_error
@@ -65,7 +66,7 @@ write_matrix:
     # fwrite the ncols
     mv a1,s4
     mv a2,s8
-    mv a3,1
+    li a3,1
     li a4,4
     jal fwrite
     bne a0,a3,fwrite_error
@@ -77,6 +78,7 @@ write_matrix:
     mv a2,s5
     mv a3,s6
     li a4,4
+    jal fwrite
     bne a0,a3,fwrite_error
 
     # fclose
@@ -96,7 +98,8 @@ restore_stack:
     lw s6,24(sp)
     lw s7,28(sp)
     lw s8,32(sp)
-    addi sp,sp,36
+    lw ra,36(sp)
+    addi sp,sp,40
 
     ret
 
