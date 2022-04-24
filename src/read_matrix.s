@@ -52,7 +52,7 @@ read_matrix:
     beq s3,t0,fopen_error
 
     # fread nrows
-    mv a1,a0
+    mv a1,s3
     mv a2,s1
     li a3,4
     jal fread
@@ -61,7 +61,7 @@ read_matrix:
     bne a0,t0,fread_error
 
     # fread ncols
-    mv a1,a0
+    mv a1,s3
     mv a2,s2
     li a3,4
     jal fread
@@ -73,6 +73,8 @@ read_matrix:
     lw s4,0(s1)
     lw s5,0(s2)
     mul t1,s4,s5
+    li t3,4
+    mul t1,t1,t3
     mv a0,t1
     jal malloc
     # now a0->matrix
@@ -82,13 +84,16 @@ read_matrix:
     mv s7,s6    
     li s8,0
 
+    mul t1,s4,s5
 loop_start:
-    bge s8,t1,loop_end  #line 62,t1->size of matrix
+    bge s8,t1,loop_end  
 
     mv a1,s3
     mv a2,s7
     li a3,4
     jal fread
+    li t0,4
+    bne a0,t0,fread_error
 
     addi s7,s7,4
     addi s8,s8,1
