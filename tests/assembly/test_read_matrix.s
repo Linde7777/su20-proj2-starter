@@ -8,19 +8,14 @@
 # want to run this program on you machine
 .data
 file_path: .asciiz "/root/su20-proj2-starter/tests/inputs/test_read_matrix/test_input.bin"
+m1: .word 0
+m2: .word 0
 
 .text
 main:
     # Read matrix into memory
-    li s1,4     #s1->*nrows
-    mv a0,s1
-    jal malloc
-    mv s1,a0    
-
-    li s2,4     #s2->*ncols
-    mv a0,s2
-    jal malloc
-    mv s2,a0    
+    la s1,m1
+    la s2,m2
 
     #a->filename
     la s0,file_path
