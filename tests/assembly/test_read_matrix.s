@@ -1,8 +1,13 @@
 .import ../../src/read_matrix.s
 .import ../../src/utils.s
 
+# the following file_path is different from 
+# official path, since the venus on my machine 
+# can not recognize it.
+# I use the absolute path, please modify path if you
+# want to run this program on you machine
 .data
-file_path: .asciiz "inputs/test_read_matrix/test_input.bin"
+file_path: .asciiz "/root/su20-proj2-starter/tests/inputs/test_read_matrix/test_input.bin"
 
 .text
 main:
@@ -20,6 +25,8 @@ main:
     #a->filename
     la s0,file_path
     mv a0,s0
+    mv a1,s1
+    mv a2,s2
     jal read_matrix
     # now a0->matrix
     mv s3,a0    #s3->matrix
@@ -34,4 +41,4 @@ main:
     jal print_int_array
 
     # Terminate the program
-    ret
+    jal exit
