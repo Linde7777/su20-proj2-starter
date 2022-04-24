@@ -13,7 +13,6 @@ m2: .word 0
 
 .text
 main:
-    # Read matrix into memory
     la s1,m1
     la s2,m2
 
@@ -25,7 +24,6 @@ main:
     jal read_matrix
     # now a0->matrix
     mv s3,a0    #s3->matrix
-
 
     # Print out elements of matrix
     lw t0,0(s1) #t0->number of rows
