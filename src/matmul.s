@@ -128,17 +128,27 @@ outer_loop_end:
     
     addi sp,sp,52
 
+    li t0,2
+    beq a1,t0,error_exit
+    li t0,3
+    beq a1,t0,error_exit
+    li t0,4
+    beq a1,t0,error_exit
+
     ret
 
 
 m0_dimen_error:
-    addi a0,x0,2
+    addi a1,x0,2
     jal x0,outer_loop_end
 
 m1_dimen_error:
-    addi a0,x0,3
+    addi a1,x0,3
     jal x0,outer_loop_end
 
 dimen_match_error:
-    addi a0,x0,4
+    addi a1,x0,4
     jal x0,outer_loop_end
+
+error_exit:
+    jal x0,exit2
