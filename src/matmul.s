@@ -1,4 +1,3 @@
-.import ./dot.s
 .globl matmul
 
 .text
