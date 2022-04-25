@@ -34,4 +34,5 @@ main:
     jal print_int_array
 
     # Terminate the program
+    # free matrix?
     jal exit
