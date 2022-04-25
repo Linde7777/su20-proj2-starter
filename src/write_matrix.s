@@ -5,7 +5,6 @@
 # FUNCTION: Writes a matrix of integers into a binary file
 #   If any file operation fails or doesn't write the proper number of bytes,
 #   exit the program with exit code 1.
-#   TODO: exit2 a1->exit code
 # FILE FORMAT:
 #   The first 8 bytes of the file will be two 4 byte ints representing the
 #   numbers of rows and columns respectively. Every 4 bytes thereafter is an
@@ -78,6 +77,7 @@ restore_stack:
 
     li t0,1
     beq a1,t0,error_exit
+
     ret
 
 fopen_error:
