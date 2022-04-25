@@ -28,24 +28,19 @@
 write_matrix:
 
     # Prologue
-    addi sp,sp,-40
+    addi sp,sp,-28
     sw s0,0(sp)
     sw s1,4(sp)
     sw s2,8(sp)
     sw s3,12(sp)
     sw s4,16(sp)
     sw s5,20(sp)
-    sw s6,24(sp)
-    sw s7,28(sp)
-    sw s8,32(sp)
-    sw ra,36(sp)
+    sw ra,24(sp)
 
     mv s0,a0
     mv s1,a1
     mv s2,a2
     mv s3,a3
-    mv s7,s2
-    mv s8,s3
 
     # fopen 
     mv a1,s0
@@ -55,28 +50,11 @@ write_matrix:
     li t0,-1
     beq a0,t0,fopen_error
 
-    # fwrite the nrows
-    mv a1,s4
-    mv a2,s7
-    li a3,1
-    li a4,4
-    jal fwrite
-    bne a0,a3,fwrite_error
-
-    # fwrite the ncols
-    mv a1,s4
-    mv a2,s8
-    li a3,1
-    li a4,4
-    jal fwrite
-    bne a0,a3,fwrite_error
-
     # fwrite 9 numbers
-    mul s6,s2,s3
-    mv s5,s1
+    mul s5,s2,s3
     mv a1,s4
-    mv a2,s5
-    mv a3,s6
+    mv a2,s1
+    mv a3,s5
     li a4,4
     jal fwrite
     bne a0,a3,fwrite_error
@@ -95,22 +73,27 @@ restore_stack:
     lw s3,12(sp)
     lw s4,16(sp)
     lw s5,20(sp)
-    lw s6,24(sp)
-    lw s7,28(sp)
-    lw s8,32(sp)
-    lw ra,36(sp)
-    addi sp,sp,40
+    lw ra,24(sp)
+    addi sp,sp,28
 
+    li t0,1
+    beq a1,t0,error_exit
     ret
 
 fopen_error:
     li a0,53
+    li a1,1
     jal x0,restore_stack
 
 fwrite_error:
     li a0,54
+    li a1,1
     jal x0,restore_stack
 
 fclose_error:
     li a0,55
+    li a1,1
     jal x0,restore_stack
+
+error_exit:
+    jal x0,exit2
