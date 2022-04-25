@@ -124,16 +124,25 @@ recover_stack:
     lw ra,36(sp)
     addi sp,sp,40
 
+    li t0,1
+    beq a1,t0,error_exit
+
     ret
 
 fopen_error:
     li a0,50
+    li a1,1
     jal x0,recover_stack
 
 fread_error:
     li a0,51
+    li a1,1
     jal x0,recover_stack
 
 fclose_error:
     li a0,52
+    li a1,1
     jal x0,recover_stack
+
+error_exit:
+    jal x0,exit2
