@@ -28,19 +28,18 @@ classify:
     # LOAD MATRICES
     # =====================================
 
-    #TODO: Prologue
-    
-
+    # Prologue
     lw t0,1(a1)
     lw t1,2(a1)
     lw t2,3(a1)
     lw t3,4(a1)
-    #TODO:stack
-    addi sp,sp,-80
+    addi sp,sp,-88
     sw t0,0(sp)
     sw t1,16(sp)
     sw t2,32(sp)
     sw t3,72(sp)
+    sw a0,80(sp)
+    sw a2,84(sp)
 
     # Load pretrained m0
     lw t0,0(sp)
@@ -161,13 +160,32 @@ classify:
 
 
     # Print classification
-    
+    li t0,0
+    lw t1,84(sp)
+    bne t0,t1,end
+    lw a0,60(sp)
+    lw a1,64(sp)
+    lw a2,68(sp)
+    jal print_int_array
+
 
     # Print newline afterwards for clarity
     li a1,'\n'
     jal print_char
 
-    # TODO:free
-    
+end:
+    # free space
+    lw a0,12(sp)
+    jal free
+    lw a0,28(sp)
+    jal free
+    lw a0,44(sp)
+    jal free
+    lw a0,48(sp)
+    jal free
+    lw a0,60(sp)
+    jal free
+
     # TODO: epilogue
+
     ret
