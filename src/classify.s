@@ -29,28 +29,14 @@ classify:
     # =====================================
 
     #TODO: Prologue
-    /*
-    sw s0,0(sp)
-    sw s1,4(sp)
-    sw s2,8(sp)
-    sw s3,12(sp)
-    sw s4,16(sp)
-    sw s5,20(sp)
-    sw s6,24(sp)
-    sw s7,28(sp)
-    sw s8,32(sp)
-    sw s9,36(sp)
-    sw s10,40(sp)
-    sw s11,44(sp)
-    */
     
 
     lw t0,1(a1)
     lw t1,2(a1)
     lw t2,3(a1)
     lw t3,4(a1)
-    TODO:stack
-    addi sp,sp,
+    #TODO:stack
+    addi sp,sp,-80
     sw t0,0(sp)
     sw t1,16(sp)
     sw t2,32(sp)
@@ -93,33 +79,88 @@ classify:
     # 2. NONLINEAR LAYER: ReLU(m0 * input)
     # 3. LINEAR LAYER:    m1 * ReLU(m0 * input)
     
-    # hidden_layer(s12) =matmul(m0,input)
-
+    # hidden_layer =matmul(m0,input)
+    lw a1,4(sp)
+    lw a1,0(a1)
+    lw a2,8(sp)
+    lw a2,0(a2)
     
-    # calculate the height 
-    # and width of hidden_layer
+    lw a3,44(sp)
+    lw a4,36(sp)
+    lw a4,0(a4)
+    lw a5,40(sp)
+    lw a5,0(a5)
+    
+    # calculate the size of hidden_layer
+    # then malloc hidden_layer
+    mul t0,a1,a5
+    mv a0,t0
+    jal malloc
+    mv s0,a0    # s0->hidden_layer
+    sw s0,48(sp)
+    sw a1,52(sp)
+    sw a5,56(sp)
+
+    # call matmul()
+    lw a0,12(sp)
+    mv a6,s0
+    jal matmul
 
     # relu(hidden_layer)
+    lw a0,48(sp)
+    lw t0,52(sp)
+    lw t1,56(sp)
+    mul t2,t0,t1
+    mv a1,t2
+    jal relu
 
     # scores=matmul(m1,hidden_layer)
+    lw a1,20(sp)
+    lw a1,0(a1)
+    lw a2,24(sp)
+    lw a2,0(a2)
+    lw a3,48(sp)
+    lw a4,52(sp)
+    lw a5,56(sp)
 
-    # calculate the height and
-    # width of scores
+    # calculate the size of score
+    # then malloc score
+    mul t0,a1,a5
+    mv a0,t0
+    jal malloc
+    mv s0,a0    # s0->score
+    sw s0,60(sp)
+    sw a1,64(sp)
+    sw a5,68(sp)
 
+    # call matmul()
+    lw a0,28(sp)
+    mv a6,s0
+    jal matmul
 
     # =====================================
     # WRITE OUTPUT
     # =====================================
     # Write output matrix
+    lw a0,72(sp)
+    lw a1,60(sp)
+    lw a2,64(sp)
+    lw a3,68(sp)
+    jal write_matrix
 
     # =====================================
     # CALCULATE CLASSIFICATION/LABEL
     # =====================================
     # Call argmax
+    lw a0,60(sp)
+    lw t0,64(sp)
+    lw t1,68(sp)
+    mul t2,t0,t1
+    mv a1,t2
+    jal argmax
+
 
     # Print classification
-    mv a1,
-    jal print_int
     
 
     # Print newline afterwards for clarity
