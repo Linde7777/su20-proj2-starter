@@ -187,5 +187,8 @@ end:
     jal free
 
     # TODO: epilogue
+    lw a0,80(sp)
+    lw a2,84(sp)
+    addi sp,sp,88
 
     ret
