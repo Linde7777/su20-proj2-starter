@@ -7,29 +7,32 @@ return a0->classification
 0(sp)->m0_path   
 4->ptr to height of m0
 8->ptr to width of m0
-12->ptr to m0 in memory
+12->ptr to m0 
 
 16(sp)->m1_path
 20->ptr to height of m1
 24->ptr to width of m1
-28->ptr to m1 in memory
+28->ptr to m1 
 
 32(sp)->input_path
 36->ptr to height of input
 40->ptr to width of input
-44->ptr to input in memory
+44->ptr to input 
 
-48->hidden_layer
+48->ptr to hidden_layer
 52->height of hidd
 56->width of hidd
 
-60->scores
+60->ptr to scores
 64->height of scores
 68->width of scores
 
 72(sp)->output_path
 
 76->classfication of input
+
+80->the a0 passed in classify()
+84->the a2 passed in classify()
 
 read_matrix
 a0 (char*) pointer to filename
