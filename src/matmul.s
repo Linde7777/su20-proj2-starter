@@ -56,11 +56,12 @@ matmul:
     mv s4,a4
     mv s5,a5
     mv s6,a6
-    add s7,s1,x0
-    add s8,s1,x0
-    add s9,s6,x0
-    add s10,x0,x0
-    add s11,x0,x0
+
+    mv s7,s1
+    mv s8,s5
+    mv s9,s6
+    li s10,0
+    li s11,0
 
 outer_loop_start:
     bge s10,s7,outer_loop_end
