@@ -36,7 +36,7 @@ void matmul(int *arr0, int h0, int w0, int *arr1, int h1, int w1, int *c) {
   // I have ignore the invalid input check
  
   int height_of_c = h0; 
-  int width_of_c = h0;  
+  int width_of_c = w1;  
   int *ptrc = c;
 
   /*
