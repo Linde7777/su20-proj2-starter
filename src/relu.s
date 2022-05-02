@@ -32,9 +32,9 @@ relu:
     sw s2,8(sp)
     sw ra,12(sp)
 
-    addi s0,a0,0    #arr
-    addi s1,a1,0    #number of element
-    addi s2,x0,0    #i
+    mv s0,a0    #s0->ptr to arr
+    mv s1,a1    #s1->number of element
+    li s2,0     #s2->i
 
     li t0,1
     blt s1,t0,error
@@ -46,7 +46,7 @@ loop_start:
 
     bge t0,x0,loop_continue
     
-    addi t0,x0,0
+    li t0,0
     sw t0,0(s0)
 
 loop_continue:
