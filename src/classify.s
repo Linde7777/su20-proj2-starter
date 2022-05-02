@@ -106,17 +106,16 @@ classify:
     # 3. LINEAR LAYER:    m1 * ReLU(m0 * input)
     
     # hidden_layer =matmul(m0,input)
-    lw s0,4(sp)
-    lw s1,40(sp)
-    
     # calculate the size of hidden_layer
     # then malloc hidden_layer
+    lw s0,4(sp)
+    lw s1,40(sp)
     mul t0,s0,s1
     li t1,4
     mul t0,t0,t1
     mv a0,t0
     jal malloc
-    mv s2,a0    # s0->hidden_layer
+    mv s2,a0    # s2->hidden_layer
     sw s2,48(sp)
     sw s0,52(sp)
     sw s1,56(sp)
@@ -140,24 +139,25 @@ classify:
     jal relu
 
     # scores=matmul(m1,hidden_layer)
-    lw a1,20(sp)
-    lw a2,24(sp)
-    lw a4,52(sp)
-    lw a5,56(sp)
-
     # calculate the size of score
     # then malloc score
-    mul t0,a1,a5
+    lw s0,20(sp)
+    lw s1,52(sp)
+    mul t0,s0,s1
     li t1,4
     mul t0,t0,t1
     mv a0,t0
     jal malloc
-    mv s0,a0    # s0->score
-    sw s0,60(sp)
-    sw a1,64(sp)
-    sw a5,68(sp)
+    mv s2,a0    # s2->score
+    sw s2,60(sp)
+    sw s0,64(sp)
+    sw s1,68(sp)
 
     # call matmul()
+    lw a1,20(sp)
+    lw a2,24(sp)
+    lw a4,52(sp)
+    lw a5,56(sp)
     lw a0,28(sp)
     lw a3,48(sp)
     mv a6,s0
@@ -184,16 +184,9 @@ classify:
     mv a1,t2
     jal argmax
 
-
     # Print classification
-    li t0,0
-    lw t1,84(sp)
-    bne t0,t1,end
-    lw a0,60(sp)
-    lw a1,64(sp)
-    lw a2,68(sp)
-    jal print_int_array
-
+    mv a1,a0
+    jal print_int
 
     # Print newline afterwards for clarity
     li a1,'\n'
