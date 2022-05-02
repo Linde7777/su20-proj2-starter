@@ -138,6 +138,11 @@ classify:
     mv a1,t2
     jal relu
 
+    #lw a0,48(sp)
+    #lw a1,52(sp)
+    #lw a2,56(sp)
+    #jal print_int_array
+
     # scores=matmul(m1,hidden_layer)
     # calculate the size of score
     # then malloc score
@@ -152,6 +157,11 @@ classify:
     sw s2,60(sp)
     sw s0,64(sp)
     sw s1,68(sp)
+
+    #lw a0,60(sp)
+    #lw a1,64(sp)
+    #lw a2,68(sp)
+    #jal print_int_array
 
     # call matmul()
     lw a1,20(sp)
@@ -172,6 +182,11 @@ classify:
     lw a2,64(sp)
     lw a3,68(sp)
     jal write_matrix
+
+    #lw a0,60(sp)
+    #lw a1,64(sp)
+    #lw a2,68(sp)
+    #jal print_int_array
 
     # =====================================
     # CALCULATE CLASSIFICATION/LABEL
