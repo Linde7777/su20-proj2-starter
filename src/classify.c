@@ -5,18 +5,18 @@ a2-> if 0, print classification
 return a0->classification
 
 0(sp)->m0_path   
-4->ptr to height of m0
-8->ptr to width of m0
+4->height of m0
+8->width of m0
 12->ptr to m0 
 
 16(sp)->m1_path
-20->ptr to height of m1
-24->ptr to width of m1
+20->height of m1
+24->width of m1
 28->ptr to m1 
 
 32(sp)->input_path
-36->ptr to height of input
-40->ptr to width of input
+36->height of input
+40->width of input
 44->ptr to input 
 
 48->ptr to hidden_layer
